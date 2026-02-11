@@ -2,10 +2,12 @@ import express from 'express';
 
 const app = express();
 
-// MUITO IMPORTANTE
+// aceita JSON
 app.use(express.json());
 
-// rota raiz para o webhook
+// aceita formulário (GreatPages usa muito isso)
+app.use(express.urlencoded({ extended: true }));
+
 app.post('/', (req, res) => {
   console.log('📥 Lead recebido do GreatPages:');
   console.log(req.body);
@@ -13,9 +15,7 @@ app.post('/', (req, res) => {
   res.status(200).json({ success: true });
 });
 
-// Railway define a porta
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`🚀 Server rodando na porta ${PORT}`);
 });
