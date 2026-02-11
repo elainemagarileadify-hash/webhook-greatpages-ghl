@@ -4,8 +4,7 @@ import axios from "axios";
 const app = express();
 
 /**
- * 🔑 Middlewares para aceitar TODOS os formatos
- * GreatPages costuma enviar form-data ou urlencoded
+ * 🔑 Aceita JSON, form-data e urlencoded (GreatPages)
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,28 +36,25 @@ app.post("/", async (req, res) => {
   try {
     console.log("📥 Lead recebido do GreatPages:", JSON.stringify(req.body, null, 2));
 
-    // Captura flexível (todos os padrões comuns do GreatPages)
+    // 🔍 Mapeamento definitivo (baseado no seu log real)
     const first_name =
-      req.body.name ||
+      req.body.Nome ||
       req.body.nome ||
-      req.body.first_name ||
-      req.body["Nome"] ||
-      req.body.lead?.name ||
-      req.body.lead?.nome ||
+      req.body.name ||
       "";
 
     const email =
+      req.body.E_mail ||
+      req.body.Email ||
       req.body.email ||
-      req.body["E-mail"] ||
-      req.body.lead?.email ||
       "";
 
     const phone =
-      req.body.phone ||
+      req.body.WhatsApp ||
+      req.body.whatsapp ||
+      req.body.Telefone ||
       req.body.telefone ||
-      req.body["Telefone"] ||
-      req.body.lead?.phone ||
-      req.body.lead?.telefone ||
+      req.body.phone ||
       "";
 
     const payloadGHL = {
@@ -70,10 +66,9 @@ app.post("/", async (req, res) => {
 
     console.log("📤 Payload enviado ao GHL:", payloadGHL);
 
-    // 🔥 COLE A URL REAL DO WEBHOOK DO GHL AQUI
+    // 🔥 URL do Webhook do GoHighLevel (JÁ CONFIGURADA)
     const ghlWebhookUrl =
       "https://services.leadconnectorhq.com/hooks/CazZz5eUM1VhCuKcq5sT/webhook-trigger/137dd3d9-798d-4f02-bb37-506955b629f5";
-
 
     await axios.post(ghlWebhookUrl, payloadGHL, {
       headers: { "Content-Type": "application/json" }
