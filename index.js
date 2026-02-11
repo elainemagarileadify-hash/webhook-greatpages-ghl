@@ -1,23 +1,21 @@
-import express from "express";
+import express from 'express';
 
 const app = express();
+
+// MUITO IMPORTANTE
 app.use(express.json());
 
-// rota de teste
-app.get("/", (req, res) => {
-  res.send("Webhook GreatPages + GHL rodando 🚀");
-});
+// rota raiz para o webhook
+app.post('/', (req, res) => {
+  console.log('📥 Lead recebido do GreatPages:');
+  console.log(req.body);
 
-// webhook que o GreatPages vai chamar
-app.post("/lead", (req, res) => {
-  console.log("Lead recebido:", req.body);
-
-  // aqui depois vamos enviar pro GHL
   res.status(200).json({ success: true });
 });
 
-// porta obrigatória do Railway
+// Railway define a porta
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log("Servidor rodando na porta", PORT);
+  console.log(`🚀 Server rodando na porta ${PORT}`);
 });
