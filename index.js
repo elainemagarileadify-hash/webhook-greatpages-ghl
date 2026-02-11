@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 🔗 URL do webhook do GoHighLevel
 const GHL_WEBHOOK_URL =
-  'https://services.leadconnectorhq.com/hooks/CazZz5eUM1VhCuKcq5sT/webhook-trigger/78cfc83e-e186-49bf-900e-1a0376336b12';
+  'https://services.leadconnectorhq.com/hooks/CazZz5eUM1VhCuKcq5sT/webhook-trigger/137dd3d9-798d-4f02-bb37-506955b629f5';
 
 app.post('/', async (req, res) => {
   try {
