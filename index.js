@@ -1,9 +1,3 @@
-Perfeito. Aqui está o index.js COMPLETO, FINAL e À PROVA DE GREATPAGES.
-É copiar → colar → salvar → commit → deploy. Nada mais.
-
-⚠️ Só troque a URL do GHL (já deixei indicado).
-
-✅ index.js COMPLETO (USE ESSE, NÃO JUNTE COM OUTRO)
 import express from "express";
 import axios from "axios";
 
